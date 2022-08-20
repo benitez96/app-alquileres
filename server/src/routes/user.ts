@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { createUser } from '../controllers/user';
 import { authenticate } from '../middlewares/authenticate';
 
 
@@ -9,7 +10,7 @@ router
   .get('/', [authenticate], (req: Request, res: Response) => {
     res.json({ value: 'Hola mundo' })
   })
-  .post('/', (req, res) => res.json(req.body))
+  .post('/', createUser)
 
 
 export default router

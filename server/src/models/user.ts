@@ -3,8 +3,6 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
@@ -36,7 +34,7 @@ export class User {
   @Column()
   phone: string
 
-  @Column()
+  @Column({nullable: true})
   avatar: string
 
   @CreateDateColumn()
