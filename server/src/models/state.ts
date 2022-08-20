@@ -1,13 +1,12 @@
 import {
   Column,
-  CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
 } from "typeorm"
+import { Property } from "./property"
 
 
 @Entity()
@@ -19,10 +18,8 @@ export class State {
   @Column()
   name: string
 
-
-  // @ManyToMany(() => Property, (property) => property.users)
-  // @JoinTable()
-  // propertys: Property[]
+  @OneToMany(() => Property, (property) => property.state)
+  properties: Property[]
 
 
 }

@@ -5,9 +5,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm"
+import { Property } from "./property"
 
 
 @Entity()
@@ -29,10 +31,8 @@ export class Picture {
   @DeleteDateColumn()
   deletedDate: Date
 
-  // one to many
-  // @ManyToMany(() => Property, (property) => property.users)
-  // @JoinTable()
-  // propertys: Property[]
+  @ManyToOne(() => Property, (property) => property.pictures)
+  property: Property
 
 
 }

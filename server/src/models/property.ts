@@ -5,9 +5,15 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  PrimaryGeneratedColumn, 
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm"
+import { Picture } from "./picture"
+import { State } from "./state"
+import { Tag } from "./tag"
+import { User } from "./user"
 
 
 @Entity()
@@ -31,6 +37,8 @@ export class Property {
   @Column()
   price: number
 
+  @Column()
+  published_until: Date
 
   @CreateDateColumn()
   createdDate: Date
@@ -41,16 +49,16 @@ export class Property {
   @DeleteDateColumn()
   deletedDate: Date
 
-  // @ManyToMany(() => Organization, (organization) => organization.users)
-  // @JoinTable()
-  // organizations: Organization[]
-  
-  // @ManyToMany(() => Organization, (organization) => organization.users)
-  // @JoinTable()
-  // organizations: Organization[]
-  
-  // @ManyToMany(() => tags, (tag) => tag.users)
-  // @JoinTable()
-  // tags: Property[]
+  @ManyToOne(() => User, (user) => user.properties)
+  user: User
 
+  @ManyToOne(() => State, (state) => state.properties)
+  state: State
+
+  @OneToMany(() => Picture, (picture) => picture.property)
+  pictures: Picture[]
+
+  @ManyToMany(() => Tag, (tag) => tag.properties)
+  @JoinTable()
+  tags: Tag[]
 }

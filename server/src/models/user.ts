@@ -5,9 +5,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  PrimaryGeneratedColumn, 
+  OneToMany,
+  PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm"
+import { Property } from "./property"
 
 
 @Entity()
@@ -34,6 +36,9 @@ export class User {
   @Column()
   phone: string
 
+  @Column()
+  avatar: string
+
   @CreateDateColumn()
   createdDate: Date
 
@@ -43,8 +48,7 @@ export class User {
   @DeleteDateColumn()
   deletedDate: Date
 
-  // @ManyToMany(() => Organization, (organization) => organization.users)
-  // @JoinTable()
-  // organizations: Organization[]
+  @OneToMany(() => Property, (property) => property.user)
+  properties: Property[]
 
 }

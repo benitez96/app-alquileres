@@ -10,18 +10,20 @@ const cors_1 = __importDefault(require("cors"));
 require("reflect-metadata");
 const dotenv_1 = __importDefault(require("dotenv"));
 const typeorm_1 = require("typeorm");
+const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 exports.db = new typeorm_1.DataSource({
     type: "postgres",
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host: process.env.POSTGRES_HOST,
+    port: Number(process.env.POSTGRES_PORT),
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
     synchronize: true,
     logging: false,
     entities: [
         '../models/*.{ts,js}',
+        path_1.default.join(__dirname, '../models/*.{ts,js}')
     ],
     migrations: [],
     subscribers: [],

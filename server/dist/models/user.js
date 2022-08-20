@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
-const organization_1 = require("./organization");
+const property_1 = require("./property");
 let User = class User {
 };
 __decorate([
@@ -21,16 +21,47 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
+], User.prototype, "login", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
 ], User.prototype, "firstName", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "lastName", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => organization_1.Organization, (organization) => organization.users),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "avatar", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], User.prototype, "createdDate", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", Date)
+], User.prototype, "updatedDate", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)(),
+    __metadata("design:type", Date)
+], User.prototype, "deletedDate", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => property_1.Property, (property) => property.user),
     __metadata("design:type", Array)
-], User.prototype, "organizations", void 0);
+], User.prototype, "properties", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

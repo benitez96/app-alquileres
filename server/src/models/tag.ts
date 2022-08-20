@@ -1,13 +1,10 @@
 import {
   Column,
-  CreateDateColumn,
-  DeleteDateColumn,
   Entity,
-  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
 } from "typeorm"
+import { Property } from "./property"
 
 
 @Entity()
@@ -19,10 +16,8 @@ export class Tag {
   @Column()
   name: string
 
-
-  // @ManyToMany(() => Property, (property) => property.users)
-  // @JoinTable()
-  // propertys: Property[]
+  @ManyToMany(() => Property, (property) => property.tags)
+  properties: Property[]
 
 
 }
