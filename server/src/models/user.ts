@@ -16,7 +16,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ unique: true })
   login: string
 
   @Column()
@@ -28,13 +28,13 @@ export class User {
   @Column()
   lastName: string
 
-  @Column()
+  @Column({ unique: true })
   email: string
 
   @Column()
   phone: string
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   avatar: string
 
   @CreateDateColumn()

@@ -3,15 +3,15 @@ import * as userService from "../services/user";
 import { encrypt } from "../utils";
 
 
-export const getUser = async(req: Request, res: Response) => {
-  try{
+export const getUser = async (req: Request, res: Response) => {
+  try {
     const { id } = req.params;
 
     const user = await userService.getUserById(Number(id))
 
     console.log(user)
 
-    if (!user){
+    if (!user) {
       return res.status(404).send({ msg: 'User not found' })
     }
 
@@ -23,12 +23,12 @@ export const getUser = async(req: Request, res: Response) => {
 
 }
 
-export const getUsers = async(_: any, res: Response) => {
-  try{
+export const getUsers = async (_: any, res: Response) => {
+  try {
 
     const user = await userService.getUsers();
 
-    if (!user){
+    if (!user) {
       return res.status(404).send('User not found')
     }
 
@@ -40,13 +40,13 @@ export const getUsers = async(_: any, res: Response) => {
 
 }
 
-export const createUser = async(req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
 
   try {
 
-    const { user } = req.body;
+    const user = req.body;
 
-    user.password = await encrypt( user.password )
+    user.password = await encrypt(user.password)
     const newUser = await userService.insertUser(user);
 
     res.status(201).send(newUser)
@@ -58,22 +58,17 @@ export const createUser = async(req: Request, res: Response) => {
 }
 
 
-export const updateUser = async(req: Request, res: Response) => {
-  try{
+export const updateUser = async (req: Request, res: Response) => {
+  try {
 
-    const uid = req.user?.id;
-    const { id } = req.params;
-    const { user } = req.body;
+    const id = req.user?.id;
+    const user = req.body;
 
-    if (!uid || uid != Number( id )){
-      return res.status(403).send({ msg: 'Unauthorized' })
-    }
-
-    if (!await userService.getUserById(Number(id))){
+    if (!await userService.getUserById(Number(id))) {
       return res.status(404).send({ msg: 'User not found' })
     }
 
-    const userUpdated = await userService.updateUser( Number( id ), user )
+    const userUpdated = await userService.updateUser(Number(id), user)
 
     res.status(200).send(userUpdated)
 

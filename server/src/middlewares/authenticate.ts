@@ -9,7 +9,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
   try{
 
     if ( !req.headers.authorization ) 
-      return res.status(403).send({msg: 'Unauthorized'})
+      return res.status(401).send({msg: 'Unauthorized'})
 
     const payload = decodeJWT(req.headers.authorization)
 
@@ -19,7 +19,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
     req.user = payload.user
 
   }catch(e){
-    return res.status(403).send({ msg: 'Unauthorized' })
+    return res.status(401).send({ msg: 'Unauthorized' })
   }
 
   next()
