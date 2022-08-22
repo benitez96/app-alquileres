@@ -31,7 +31,7 @@ export class Property {
   @Column()
   adress: string
 
-  @Column()
+  @Column('text')
   description: string
 
   @Column()

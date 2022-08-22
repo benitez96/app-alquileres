@@ -1,7 +1,10 @@
 import { Property } from "./property"
 
 export interface User {
-  id: string,
+
+
+
+  id: number,
   login: string,
   password: string,
   firstName: string,

@@ -1,17 +1,15 @@
-import { db } from "../configs";
+import { db } from "../configs/database.config";
 import { User } from "../models/user";
 
-export const insertUser = async( user: User ) => {
+const userRepository = db.getRepository(User)
 
-  const newUser = await db
-    .createQueryBuilder()
-    .insert()
-    .into( User )
-    .values( user )
-    .execute()
 
-  console.log('newUser', newUser)
+export const getUsers = async () => await userRepository.find()
 
-  return newUser
+export const getUserById = async (id: number) => await userRepository.findOneBy({ id })
 
-}
+export const getUserByLogin = async (login: string) => await userRepository.findOneBy({ login })
+
+export const insertUser = async (user: User) => await userRepository.save(user)
+
+export const updateUser = async (id: number, user: User) => await userRepository.update(id, user)
