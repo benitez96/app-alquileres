@@ -13,3 +13,5 @@ export const getUserByLogin = async (login: string) => await userRepository.find
 export const insertUser = async (user: User) => await userRepository.save(user)
 
 export const updateUser = async (id: number, user: User) => await userRepository.update(id, user)
+
+export const getUserAvatar = async (id: number) => await userRepository.findOne({ where: { id }, select: { avatar: true } })
